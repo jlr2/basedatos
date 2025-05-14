@@ -18,15 +18,16 @@ public class ConexionMySQL_Statement {
 
         try {
             // Conexión a la BD
+            // Cargar el drive
             Class.forName(DRIVER);
+            // Conectar con la base de datos
             dbConnection = DriverManager.getConnection(URL_CONEXION, usuario, password);
 
             // insertar datos
-            String sentenciaSql = "INSERT INTO gama_producto (gama, descripcion_texto, descripcion_html, imagen) VALUES ('Accesorios5','Articulos para arboles', 'NULL','NULL')";
+           /* String sentenciaSql = "INSERT INTO gama_producto (gama, descripcion_texto, descripcion_html, imagen) VALUES ('Accesorios9','Articulos para rosas', 'NULL','NULL')";
 
             statement = dbConnection.createStatement();
-            statement.executeUpdate(sentenciaSql);
-
+            statement.executeUpdate(sentenciaSql);*/
 
             //  consultar datos
             String selectTableSQL = "SELECT gama, descripcion_texto FROM gama_producto";
@@ -43,6 +44,7 @@ public class ConexionMySQL_Statement {
                 System.out.println("descripcion_texto_porcolumna: " + descripcion_texto_porcolumna);
             }
 
+
             //  consultar datos: funciones agregadas
             selectTableSQL = "SELECT count(gama) FROM gama_producto";
             statement = dbConnection.createStatement();
@@ -54,11 +56,11 @@ public class ConexionMySQL_Statement {
 
 
             //  modificar datos
-            sentenciaSql = "UPDATE gama_producto SET gama = 'Accesorios CAMBIADO' WHERE gama = 'Accesorios'";
+          String  sentenciaSql = "UPDATE gama_producto SET gama = 'Accesorios CAMBIADO es hora de irse' WHERE gama = 'Accesorios9'";
             statement = null;
             statement = dbConnection.createStatement();
             statement.executeUpdate(sentenciaSql);
-
+/*
 
             //  consultar datos
             selectTableSQL = "SELECT gama, descripcion_texto FROM gama_producto";
@@ -98,7 +100,7 @@ public class ConexionMySQL_Statement {
 
                 }
             }
-
+*/
         } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }

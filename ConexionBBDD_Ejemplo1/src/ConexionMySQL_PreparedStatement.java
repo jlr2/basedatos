@@ -16,6 +16,25 @@ public class ConexionMySQL_PreparedStatement {
             Class.forName(DRIVER);
             dbConnection = DriverManager.getConnection(URL_CONEXION, usuario, password);
 
+            // CONSULTA PRUEBA INYECCIÓN SQL
+            //  consultar datos
+            String gama =  "' OR '1'='1";
+            String selectTableSQL = "SELECT gama, descripcion_texto FROM gama_producto WHERE gama = '" + gama + "'"; ;
+            Statement statement = dbConnection.createStatement();
+            rs = statement.executeQuery(selectTableSQL);
+            System.out.println("#######################################");
+            System.out.println ("PRUEBA SQL INYECTION");
+            while (rs.next()) {
+                String gama_pornombre = rs.getString("gama");
+                String descripcion_texto_pornombre = rs.getString("descripcion_texto");
+                System.out.print("gama_pornombre: " + gama_pornombre);
+                System.out.println(" - descripcion_texto_pornombre: " + descripcion_texto_pornombre);
+            }
+            System.out.println("#######################################");
+
+
+
+/*
             // INSERTAR DATOS
             String insertSQL = "INSERT INTO gama_producto (gama, descripcion_texto, descripcion_html, imagen) VALUES (?, ?, ?, ?)";
             preparedStatement = dbConnection.prepareStatement(insertSQL);
@@ -71,7 +90,7 @@ public class ConexionMySQL_PreparedStatement {
                 System.out.println("gama: " + rs.getString("gama"));
                 System.out.println("descripcion_texto: " + rs.getString("descripcion_texto"));
             }
-
+*/
         } catch (SQLException e) {
             System.out.println("Error SQL: " + e.getMessage());
         } catch (ClassNotFoundException e) {
